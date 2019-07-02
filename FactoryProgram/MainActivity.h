@@ -29,7 +29,7 @@ private:
 	int SCREEN_WIDTH;
 	int SCREEN_HEIGHT;
 
-	struct Button* buttons[2];
+	struct Button* buttons[6];
 	struct Layout* layout;
 	struct ProgressBar* progessbar;
 

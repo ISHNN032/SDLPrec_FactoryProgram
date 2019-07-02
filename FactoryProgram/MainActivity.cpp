@@ -187,8 +187,12 @@ void MainActivity::setLayout()
 {
 	layout = new Layout(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-	buttons[0] = new Button( SCREEN_WIDTH / 3 , SCREEN_HEIGHT / 6, 240, 72, {0xFF,0xFF,0xFF,0xFF}, true );
-	buttons[1] = new Button( SCREEN_WIDTH / 3 * 2 , SCREEN_HEIGHT / 6, 240, 72, {0xFF,0xFF,0xFF,0xFF}, false );
+	buttons[0] = new Button( SCREEN_WIDTH / 4 , SCREEN_HEIGHT / 6, 240, 72, {0xFF,0xFF,0xFF,0xFF}, true, true );
+	buttons[1] = new Button( SCREEN_WIDTH / 4 * 3 , SCREEN_HEIGHT / 6, 240, 72, {0xFF,0xFF,0xFF,0xFF}, false, true );
+	buttons[2] = new Button( SCREEN_WIDTH / 4 , SCREEN_HEIGHT / 2, 240, 72, {0xFF,0xFF,0xFF,0xFF}, true, true );
+	buttons[3] = new Button( SCREEN_WIDTH / 4 * 3 , SCREEN_HEIGHT / 2, 240, 72, {0xFF,0xFF,0xFF,0xFF}, false, true );
+	buttons[4] = new Button( SCREEN_WIDTH / 4 , SCREEN_HEIGHT / 6 * 5, 240, 72, {0xFF,0xFF,0xFF,0xFF}, true, true );
+	buttons[5] = new Button( SCREEN_WIDTH / 4 * 3 , SCREEN_HEIGHT / 6 * 5, 240, 72, {0xFF,0xFF,0xFF,0xFF}, false, true );
 
 	progessbar = new ProgressBar(SCREEN_WIDTH / 2 - 120, SCREEN_HEIGHT / 2 + 60);
 }
@@ -200,14 +204,13 @@ void MainActivity::drawLayout(int scene)
 
 	gBackground.render(0, 0);
 
-	layout->Draw();
-
 	gTextTexture.render((SCREEN_WIDTH - gTextTexture.getWidth()) / 2,
 		SCREEN_HEIGHT / 6 - gTextTexture.getHeight() / 2);
 
 	switch (scene)
 	{
 	case 0:
+		layout->Draw();
 		for (int i =0; i< sizeof(buttons) / sizeof(buttons[0]); ++i)
 		{
 			buttons[i]->render();
@@ -283,7 +286,7 @@ void MainActivity::checkButtonEvent(SDL_Event* e) {
 					currentButtonEvent[i] = 3;
 					std::cout << "Button [" << i << "] up" << std::endl;
 					unsigned short unicode[128];
-					han2unicode("Update File Detected", unicode);
+					han2unicode("Factory Test", unicode);
 					gTextTexture.loadFromRenderedText(unicode, {0xFF, 0xFF, 0xFF});
 
 					buttons[i]->setColor({0, 0xFF, 0, 0});
@@ -299,7 +302,7 @@ void MainActivity::checkButtonEvent(SDL_Event* e) {
 					if (currentButtonEvent[i] != 0) {
 						currentButtonEvent[i] = 0;
 						unsigned short unicode[128];
-						han2unicode("Update File Detected", unicode);
+						han2unicode("Factory Test", unicode);
 						gTextTexture.loadFromRenderedText(unicode, {0xFF, 0xFF, 0xFF});
 						buttons[i]->setColor({0xFF, 0xFF, 0xFF, 0xFF});
 						buttons[i]->onButtonUp();
