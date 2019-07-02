@@ -99,8 +99,12 @@ struct Button {
 	SDL_Color drawcolor;
 	bool flag;
 
-	Button(int x, int y, int w, int h, SDL_Color color, bool b) {
-		rect = {x + 1, y + 1, w, h};
+	Button(int x, int y, int w, int h, SDL_Color color, bool b, bool center) {
+		if(center){
+			x = x - w / 2;
+			y = y - h / 2;
+		}
+		rect = {x + 1, y + 1, w - 2, h - 2};
 		drawcolor = color;
 		flag = b;
 		onButtonUp();
