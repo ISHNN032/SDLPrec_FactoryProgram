@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include "ActivityManager.h"
 
 #pragma once
 
@@ -14,5 +15,7 @@ extern SDL_Renderer* gRenderer;
 
 //Globally used font
 extern TTF_Font* gFont;
+
+extern ActivityManager* gManager;
 
 #endif // DEBUG

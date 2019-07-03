@@ -10,4 +10,6 @@ SDL_Renderer* gRenderer = NULL;
 //Globally used font
 TTF_Font* gFont = NULL;
 
+ActivityManager* gManager = NULL;
+
 bool update_ongoing = false;

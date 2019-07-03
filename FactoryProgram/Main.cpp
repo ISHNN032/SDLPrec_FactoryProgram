@@ -1,11 +1,13 @@
 #include <iostream>
-#include "MainActivity.h"
+#include "Global.h"
+#include "ActivityManager.h"
 
 int main(int argc, char* args[]) {
 	std::cout << "Main Activity Started!" << std::endl;
 
-	MainActivity mainActivity("Factory", 1024, 600);
-	mainActivity.~MainActivity();
+	gManager = new ActivityManager(0);
+
+	gManager->startActivity(0);
 	/*
 	std::cout << "Type 'exit' to end program" << std::endl << ">> ";
 	while (true) {
@@ -14,6 +16,7 @@ int main(int argc, char* args[]) {
 		if (a == "exit") break;
 	}
 	*/
+
 
 	return EXIT_SUCCESS;
 }
