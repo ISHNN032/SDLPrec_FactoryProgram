@@ -3,6 +3,7 @@
 #include "MainActivity.h"
 #include "Global.h"
 #include "han2unicode.h"
+#include "TouchActivity.h"
 #include <iostream>
 #include <unistd.h>
 #include <pthread.h>
@@ -22,6 +23,8 @@ MainActivity::MainActivity(std::string name, int width, int height)
 	SCREEN_WIDTH = width;
 	SCREEN_HEIGHT = height;
 
+	quit = false;
+
 	if (!init())
 	{
 		std::cout << "Failed to initialize!" << std::endl;
@@ -35,8 +38,9 @@ MainActivity::MainActivity(std::string name, int width, int height)
 		loop();
 	}
 
-	currentButtonEvent[0] = 0;
-	currentButtonEvent[1] = 0;
+	for (int i =0; i< sizeof(currentButtonEvent) / sizeof(currentButtonEvent[0]); ++i){
+		currentButtonEvent[i] = 0;
+	}
 }
 
 bool MainActivity::init()
@@ -82,9 +86,6 @@ bool MainActivity::init()
 
 void MainActivity::loop()
 {
-	//Main loop flag
-	bool quit = false;
-
 	//Event handler
 	SDL_Event e;
 
@@ -232,6 +233,8 @@ void *t_function(void *data)
 }
 
 void MainActivity::checkButtonEvent(SDL_Event* e) {
+	std::cout << e->type << std::endl;
+
 	for (int i =0; i< sizeof(buttons) / sizeof(buttons[0]); ++i)
 	{
 		if (e->button.x > buttons[i]->rect.x && e->button.x < buttons[i]->rect.x + buttons[i]->rect.w
@@ -277,6 +280,13 @@ void MainActivity::checkButtonEvent(SDL_Event* e) {
 							drawLayout(1);
 							usleep(250000);
 						}
+					}
+					else if(i == 1){
+						gManager->startActivity(1);
+					}
+					else if(i ==2){
+						gManager->endActivity(0);
+						quit = true;
 					}
 				}
 				break;

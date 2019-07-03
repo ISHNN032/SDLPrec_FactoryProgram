@@ -29,11 +29,14 @@ private:
 	int SCREEN_WIDTH;
 	int SCREEN_HEIGHT;
 
+	//Main loop flag
+	bool quit;
+
 	struct Button* buttons[6];
 	struct Layout* layout;
 	struct ProgressBar* progessbar;
 
-	int currentButtonEvent[2];
+	int currentButtonEvent[6];
 };
 
 struct Layout {
