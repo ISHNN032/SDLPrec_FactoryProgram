@@ -34,6 +34,18 @@ void ActivityManager::startActivity(int n)
         touchActivity = new TouchActivity(0);
         break;
     }
+    case 2:
+    {
+        if (soundActivity != NULL)
+        {
+            soundActivity->~SoundActivity();
+            soundActivity = NULL;
+        }
+
+        soundActivity = new SoundActivity(0);
+        soundActivity->start("Resources/biii.wav");
+        break;
+    }
     }
 }
 
@@ -56,6 +68,14 @@ void ActivityManager::endActivity(int n)
         {
             touchActivity->~TouchActivity();
             touchActivity = NULL;
+        }
+    }
+    case 2:
+    {
+        if(soundActivity != NULL)
+        {
+            soundActivity->~SoundActivity();
+            soundActivity = NULL;
         }
     }
     }

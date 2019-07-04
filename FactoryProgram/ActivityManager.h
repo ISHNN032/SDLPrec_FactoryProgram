@@ -3,6 +3,7 @@
 
 #include "MainActivity.h"
 #include "TouchActivity.h"
+#include "SoundActivity.h"
 
 #pragma once
 class ActivityManager
@@ -15,6 +16,7 @@ public:
 private:
     MainActivity* mainActivity;
     TouchActivity* touchActivity;
+	SoundActivity* soundActivity;
 };
 
 #endif //_ACTIVITY_MANAGER_

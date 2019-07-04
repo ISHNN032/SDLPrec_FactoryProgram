@@ -7,7 +7,7 @@ int main(int argc, char* args[]) {
 
 	gManager = new ActivityManager(0);
 
-	gManager->startActivity(0);
+	gManager->startActivity(2);
 	/*
 	std::cout << "Type 'exit' to end program" << std::endl << ">> ";
 	while (true) {
