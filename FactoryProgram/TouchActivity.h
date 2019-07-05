@@ -46,6 +46,8 @@ private:
     void DrawScreen(SDL_Surface* screen, SDL_Window* window);
 
     SDL_Window* initWindow(SDL_Window *window, int width,int height);
+    
+    SDL_Rect* exit_button;
 };
 
 #endif //_TOUCHACTIVITY_

@@ -17,6 +17,7 @@
 
 #include "SDL.h"
 #include "TouchActivity.h"
+#include "Global.h"
 #include <iostream>
 #include <stdlib.h> /* for exit() */
 
@@ -47,6 +48,14 @@ TouchActivity::TouchActivity(int a)
     window = NULL;
     screen = NULL;
     quitting = SDL_FALSE;
+    
+    exit_button = new SDL_Rect{0, 0, 300, 300};
+    
+    /*
+    gRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderDrawRect(gRenderer, exit_button);
+    */
 
     std::cout << "0" << SDL_GetError() << std::endl;
 
@@ -89,7 +98,8 @@ TouchActivity::TouchActivity(int a)
 
 TouchActivity::~TouchActivity()
 {
-    
+    SDL_DestroyRenderer(gRenderer);
+    gRenderer = NULL;
 }
 
 void TouchActivity::loop()
@@ -116,6 +126,7 @@ void TouchActivity::loop()
                 int i;
                 for (i = 0; i < SDL_GetNumTouchDevices(); ++i)
                 {
+                    std::cout << "gt" << SDL_GetError() << std::endl;
                     SDL_TouchID id = SDL_GetTouchDevice(i);
                     SDL_Log("Fingers Down on device \"SDL_PRIs64\": %d", id, SDL_GetNumTouchFingers(id));
                 }
@@ -307,6 +318,18 @@ void TouchActivity::DrawScreen(SDL_Surface *screen, SDL_Window *window)
         {
             x = event->tfinger.x;
             y = event->tfinger.y;
+
+            std::cout << x << " , " << y << SDL_GetError() << std::endl;
+
+            //if ( x > exit_button->x && x < exit_button->x + exit_button->w
+			//        && y > exit_button->y && y < exit_button->y + exit_button->h) {
+            if( x < 0.1 && y < 0.1){
+                std::cout << "ev" << SDL_GetError() << std::endl;
+                gManager->setNext(0);
+                gManager->endActivity(1);
+                quitting = SDL_TRUE;
+                break;
+            }
 
             /* draw the touch: */
             c = colors[event->tfinger.fingerId % 7];

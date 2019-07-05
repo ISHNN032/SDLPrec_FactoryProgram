@@ -282,9 +282,7 @@ void MainActivity::checkButtonEvent(SDL_Event* e) {
 						}
 					}
 					else if(i == 1){
-						gManager->startActivity(1);
-					}
-					else if(i ==2){
+						gManager->setNext(1);
 						gManager->endActivity(0);
 						quit = true;
 					}

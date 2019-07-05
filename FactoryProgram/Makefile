@@ -10,6 +10,7 @@ OBJS =  Global.cpp \
         ActivityManager.cpp \
         TouchActivity.cpp \
         SoundActivity.cpp \
+        AccActivity.cpp \
         MainActivity.cpp
        
 

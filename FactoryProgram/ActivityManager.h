@@ -14,7 +14,12 @@ public:
 	void startActivity(int n);
 	void endActivity(int n);
 	~ActivityManager();
+
+	int getNext();
+	void setNext(int n);
 private:
+	int next_activity;
+
     MainActivity* mainActivity;
     TouchActivity* touchActivity;
 	SoundActivity* soundActivity;
