@@ -46,6 +46,19 @@ void ActivityManager::startActivity(int n)
         soundActivity->start("Resources/biii.wav");
         break;
     }
+    case 3:
+    {
+        if (accActivity != NULL)
+        {
+            accActivity->~AccActivity();
+            accActivity = NULL;
+        }
+
+        accActivity = new AccActivity(0);
+        char *argv[] = {"1", "1"};
+        accActivity->start(argv);
+        break;
+    }
     }
 }
 
@@ -78,5 +91,21 @@ void ActivityManager::endActivity(int n)
             soundActivity = NULL;
         }
     }
+    case 3:
+    {
+        if(accActivity != NULL)
+        {
+            accActivity->~AccActivity();
+            accActivity = NULL;
+        }
     }
+    }
+}
+
+int ActivityManager::getNext(){
+    return next_activity;
+}
+
+void ActivityManager::setNext(int n){
+    next_activity = n;
 }
