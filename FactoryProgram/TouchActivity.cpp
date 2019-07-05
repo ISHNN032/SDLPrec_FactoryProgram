@@ -115,6 +115,15 @@ void TouchActivity::loop()
 
         switch (event.type)
         {
+        case SDL_MOUSEBUTTONDOWN:
+            if (event.button.x > exit_button->x && event.button.x < exit_button->x + exit_button->w
+			&& event.button.y > exit_button->y && event.button.y < exit_button->y + exit_button->h){
+                std::cout << "ev" << SDL_GetError() << std::endl;
+                gManager->setNext(0);
+                gManager->endActivity(1);
+                quitting = SDL_TRUE;
+            }
+            break;
         case SDL_QUIT:
             quitting = SDL_TRUE;
             break;
@@ -318,18 +327,6 @@ void TouchActivity::DrawScreen(SDL_Surface *screen, SDL_Window *window)
         {
             x = event->tfinger.x;
             y = event->tfinger.y;
-
-            std::cout << x << " , " << y << SDL_GetError() << std::endl;
-
-            //if ( x > exit_button->x && x < exit_button->x + exit_button->w
-			//        && y > exit_button->y && y < exit_button->y + exit_button->h) {
-            if( x < 0.1 && y < 0.1){
-                std::cout << "ev" << SDL_GetError() << std::endl;
-                gManager->setNext(0);
-                gManager->endActivity(1);
-                quitting = SDL_TRUE;
-                break;
-            }
 
             /* draw the touch: */
             c = colors[event->tfinger.fingerId % 7];
