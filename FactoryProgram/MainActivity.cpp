@@ -286,6 +286,16 @@ void MainActivity::checkButtonEvent(SDL_Event* e) {
 						gManager->endActivity(0);
 						quit = true;
 					}
+					else if(i == 2){
+						gManager->setNext(2);
+						gManager->endActivity(0);
+						quit = true;
+					}
+					else if(i == 3){
+						gManager->setNext(3);
+						gManager->endActivity(0);
+						quit = true;
+					}
 				}
 				break;
 
